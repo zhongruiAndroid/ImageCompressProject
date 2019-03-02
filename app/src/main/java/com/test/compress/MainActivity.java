@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             progressBar.setTitle("压缩中");
         }
         progressBar.show();
-        MyCompress.get(this).setQuality(50).setMaxWidthPixel(1080).setEachCompressQuality(10).setPath(imagePath).setCompressListener(new CompressSingleListener() {
+        MyCompress.get(this).setQuality(60).setMaxHeightPixel(1080).setPath(imagePath).setCompressListener(new CompressSingleListener() {
             @Override
             public void onSuccess(String compressPath) {
                 log("onSuccess:"+compressPath);
