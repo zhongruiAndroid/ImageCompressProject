@@ -1,5 +1,10 @@
 # ImageCompressProject
 
+## [Demo.apk下载](https://raw.githubusercontent.com/zhongruiAndroid/ImageCompressProject/master/file/demo.apk "apk文件")
+
+## [jar下载](https://raw.githubusercontent.com/zhongruiAndroid/ImageCompressProject/master/file/imagecompress.jar "jar文件")
+
+
 ```java
 /*像素+质量压缩*/
 MyCompress.getBuilder(this)
