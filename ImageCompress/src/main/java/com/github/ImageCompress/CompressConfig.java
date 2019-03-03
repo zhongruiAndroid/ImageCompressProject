@@ -177,6 +177,7 @@ public class CompressConfig {
     }
 
     public void setCacheDir(String cacheDir) {
+        makeDir(cacheDir);
         this.cacheDir = cacheDir;
     }
 
