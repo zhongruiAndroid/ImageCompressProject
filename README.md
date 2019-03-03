@@ -69,14 +69,14 @@ MyCompress.getBuilder(this)
 ```java
 /*单张图片压缩回调*/
 public abstract class CompressSingleListener {
-	/*压缩成功返回压缩之后的路径*/
+    /*压缩成功返回压缩之后的路径*/
     public abstract void onSuccess(String compressPath);
     public abstract void onError(String errorPath,int errorCode);
 }
 
 /*多张图片List<String>压缩回调*/
 public abstract class CompressListener {
-	/*每次压缩完一张图片后返回保存路径以及当前图片下标，和需要压缩的图片总数*/
+    /*每次压缩完一张图片后返回保存路径以及当前图片下标，和需要压缩的图片总数*/
     public void onNext(String compressPath,int position,int count){};
     public abstract void onSuccess(List<String> compressPathList);
     public abstract void onError(List<String> pathList,String errorPath,int errorCode);
