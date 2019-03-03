@@ -1,6 +1,7 @@
 package com.github.ImageCompress;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import java.util.List;
 
@@ -107,6 +108,11 @@ public class MyCompress {
             return this;
         }
 
+        public Builder setFormat(Bitmap.CompressFormat format) {
+            this.config.setFormat(format);
+            return this;
+        }
+
       /*  public Builder setReserveRaw(boolean reserveRaw) {
             this.config.setReserveRaw(reserveRaw);
             return this;
@@ -178,10 +184,15 @@ public class MyCompress {
             this.config.setCacheDir(cacheDir);
             return this;
         }
-      /*  public Builder setReserveRaw(boolean reserveRaw) {
-            this.config.setReserveRaw(reserveRaw);
+
+        /*  public Builder setReserveRaw(boolean reserveRaw) {
+              this.config.setReserveRaw(reserveRaw);
+              return this;
+          }*/
+        public BuilderPixel setFormat(Bitmap.CompressFormat format) {
+            this.config.setFormat(format);
             return this;
-        }*/
+        }
 
         public void start() {
             MyCompress compress = new MyCompress(manager);
@@ -253,6 +264,11 @@ public class MyCompress {
 
         public BuilderQuality setCacheDir(String cacheDir) {
             this.config.setCacheDir(cacheDir);
+            return this;
+        }
+
+        public BuilderQuality setFormat(Bitmap.CompressFormat format) {
+            this.config.setFormat(format);
             return this;
         }
       /*  public Builder setReserveRaw(boolean reserveRaw) {
