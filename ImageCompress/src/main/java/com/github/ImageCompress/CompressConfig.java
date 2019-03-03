@@ -25,8 +25,8 @@ public class CompressConfig {
     @IntDef({type_pixel_quality,type_pixel,type_quality})
     public @interface CompressType{};
     public int compressType=type_pixel_quality;
-    /**图片质量默认压缩至原图片的65%*/
-    public int quality=65;
+    /**图片质量默认压缩至原图片的60%*/
+    public int quality=60;
     /** 图片压缩之后的文件大小*/
     public float maxFileSize=0;
     /** 每次压缩原图的百分比*/

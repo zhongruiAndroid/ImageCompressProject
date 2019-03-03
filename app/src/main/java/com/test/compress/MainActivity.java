@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activity=this;
         setContentView(R.layout.activity_main);
         initView();
+
     }
 
     private void initView() {
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void testCompress(){
-        String absoluteFile = Environment.getExternalStorageDirectory().getAbsoluteFile()+"/2019/";
+        String absoluteFile = Environment.getExternalStorageDirectory().getAbsoluteFile()+"/190302/";
 
         CompressSingleListener compressSingleListener = new CompressSingleListener() {
             @Override
@@ -293,9 +294,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /*ui线程压缩*/
         CompressConfig compressConfig=new CompressConfig(this);
         CompressManager manager=new CompressManager(compressConfig);
-        String compressPath = manager.compressPX("");//像素压缩
-        String compressPath1 = manager.compressQ("");//质量压缩
-        String compressPath2 = manager.compressPXAndQ("");//像素+质量压缩
+        String compressPath = manager.compressPX(absoluteFile+"1.jpg");//像素压缩
+        String compressPath1 = manager.compressQ(absoluteFile+"2.jpg");//质量压缩
+        String compressPath2 = manager.compressPXAndQ(absoluteFile+"3.jpg");//像素+质量压缩
     }
 
     public void log(String string) {
