@@ -20,7 +20,7 @@ MyCompress.getBuilder(this)
                 .setMaxHeightPixel(1280)//像素压缩之后的图片高度不超过1280,默认值1920,单位px
                 //压缩过程只会满足其中一个条件,maxWidthPixel或者maxHeightpixel
                 .setFormat(Bitmap.CompressFormat.JPEG)//设置压缩之后的图片格式，默认JPEG
-                .setQuality(60)//质量压缩图片至原图质量的60%，默认值65
+                .setQuality(55)//质量压缩图片至原图质量的55%，默认值60
                 .setEachCompressQuality(10)//每次减少10%的质量,默认值5
                 .setMaxFileSize(300)//质量压缩后的文件大小不超过300，默认值0，单位KB
                 //优先级：setMaxFileSize不等于0时 > setQuality
