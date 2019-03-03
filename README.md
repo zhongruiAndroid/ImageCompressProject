@@ -4,6 +4,7 @@
 
 ## [jar下载](https://raw.githubusercontent.com/zhongruiAndroid/ImageCompressProject/master/file/imagecompress.jar "jar文件")
 
+##### 如果无法下载,demo.apk和jar,它们都在上面的file文件夹目录里面
 
 ```java
 /*像素+质量压缩*/
