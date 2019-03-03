@@ -167,9 +167,9 @@ public class CompressManager {
         if (sourceType == sourceType_single) {
             compressForSingle(getImagePath());
         } else if (sourceType == sourceType_list) {
-            compressForList();
+            compressForList(getImagePathList());
         } else if (sourceType == sourceType_photo ) {
-            compressForPhoto();
+            compressForPhoto(getPhotoList());
         } else {
             sendErrorMessage("", error_path_null);
             /*try {
@@ -209,8 +209,8 @@ public class CompressManager {
         thread.start();
     }
 
-    public void compressForList() {
-        if(getImagePathList() == null || getImagePathList().size() == 0){
+    private void compressForList(final List<String> imagePathList) {
+        if(imagePathList== null ||imagePathList.size() == 0){
             sendErrorMessage("", error_path_null);
             return;
         }
@@ -252,8 +252,8 @@ public class CompressManager {
         thread.start();
     }
 
-    public void compressForPhoto() {
-        if(getPhotoList() == null || getPhotoList().size()==0){
+    private void compressForPhoto(final List<ThePhoto> photoList) {
+        if(photoList== null || photoList.size()==0){
             sendErrorMessage("", error_path_null);
             return;
         }
@@ -308,10 +308,7 @@ public class CompressManager {
             savePath = compressQuality(originalPath);
         } else {
             //像素+质量压缩
-            //先像素压缩
-            Bitmap bitmap = compressPixelToBitmap(originalPath);
-            //再质量压缩
-            savePath = compressQuality(bitmap, originalPath);
+            savePath = compressPixelAndQuality(originalPath);
         }
         return savePath;
     }
@@ -474,7 +471,12 @@ public class CompressManager {
         return bitmap;
     }
 
-    private String compressPixel(String originalPath) {
+    /***
+     * 像素压缩
+     * @param originalPath
+     * @return
+     */
+    public String compressPixel(String originalPath) {
         Bitmap bitmap = compressPixelToBitmap(originalPath);
         File saveFile = getSaveFile(originalPath);
         String savePath = saveFile.getAbsolutePath();
@@ -492,9 +494,22 @@ public class CompressManager {
      *
      * @param originalPath
      */
-    private String compressQuality(String originalPath) {
+    public String compressQuality(String originalPath) {
         Bitmap bitmap = CompressUtils.compressBitmapForScale(originalPath, 1);
         return compressQuality(bitmap, originalPath);
+    }
+
+    /***
+     * 像素+质量压缩
+     * @param originalPath
+     * @return
+     */
+    public String compressPixelAndQuality(String originalPath){
+        //先像素压缩
+        Bitmap bitmap = compressPixelToBitmap(originalPath);
+        //再质量压缩
+       String  savePath = compressQuality(bitmap, originalPath);
+       return savePath;
     }
 
     private String compressQuality(Bitmap bitmap, String originalPath) {

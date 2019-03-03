@@ -18,7 +18,7 @@ public class MyCompress {
         manager.startCompress();
     }
 
-    public static Builder get(Context context) {
+    public static Builder getBuilder(Context context) {
         return new Builder(context);
     }
 

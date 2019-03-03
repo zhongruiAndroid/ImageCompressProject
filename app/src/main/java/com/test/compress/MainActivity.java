@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.github.ImageCompress.CompressConfig;
 import com.github.ImageCompress.CompressListener;
+import com.github.ImageCompress.CompressManager;
 import com.github.ImageCompress.CompressObjListener;
 import com.github.ImageCompress.CompressSingleListener;
 import com.github.ImageCompress.MyCompress;
@@ -184,7 +186,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //compressSingleListener
         //compressListener
         //compressObjListener
-        MyCompress.get(this).setQuality(60).setEachCompressQuality(5).setMaxWidthPixel(1080).setPhotoList(null).setCompressListener(compressObjListener).start();
+        MyCompress.getBuilder(this).setQuality(60).setEachCompressQuality(5).setMaxWidthPixel(1080).setPhotoList(photoList).setCompressListener(compressObjListener).start();
+
+        MyCompress.Builder builder = MyCompress.getBuilder(this);
+        builder.start();
+
+        CompressConfig compressConfig=new CompressConfig(this);
+        CompressManager manager=new CompressManager(compressConfig);
+
+        String s = manager.compressPixel("");
+        String s1 = manager.compressQuality("");
+        String s2 = manager.compressPixel("");
     }
 
     private void selectImage() {
