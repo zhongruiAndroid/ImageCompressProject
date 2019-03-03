@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setPath(imagePath)
 //                .setPathList()
 //                .setPhotoList()
-//                .setCacheDir(compressDir)
+                .setCacheDir(compressDir)
 //                .setEachCompressQuality(10)
 //                .setMaxWidthPixel(1080)
 //                .setMaxHeightPixel(1920)
