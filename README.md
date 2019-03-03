@@ -21,15 +21,30 @@ MyCompress.getBuilder(this)
                 //.setPhotoList(List<ThePhoto>)多张图片压缩
                 //设置图片压缩之后的目录,默认值getExternalCacheDir().getAbsolutePath()+"/compress";
                 .setCacheDir(compressDir)
-                .setMaxWidthPixel(720)//像素压缩之后的图片宽度不超过720,默认值当前屏幕宽度,单位px
-                .setMaxHeightPixel(1280)//像素压缩之后的图片高度不超过1280,默认值1920,单位px
+		
+		//像素压缩之后的图片宽度不超过720,默认值当前屏幕宽度,单位px
+                .setMaxWidthPixel(720)
+		
                 //压缩过程只会满足其中一个条件,maxWidthPixel或者maxHeightpixel
-                .setFormat(Bitmap.CompressFormat.JPEG)//设置压缩之后的图片格式，默认JPEG
-                .setQuality(55)//质量压缩图片至原图质量的55%，默认值60
-                .setEachCompressQuality(10)//每次减少10%的质量,默认值5
-                .setMaxFileSize(300)//质量压缩后的文件大小不超过300，默认值0，单位KB
+		//像素压缩之后的图片高度不超过1280,默认值1920,单位px
+                .setMaxHeightPixel(1280)
+		
+		//设置压缩之后的图片格式，默认JPEG
+                .setFormat(Bitmap.CompressFormat.JPEG)
+		
+		//质量压缩图片至原图质量的55%，默认值60
+                .setQuality(55)
+		
+		//每次减少10%的质量,默认值5
+                .setEachCompressQuality(10)
+		
+		//质量压缩后的文件大小不超过300，默认值0，单位KB
                 //优先级：setMaxFileSize不等于0时 > setQuality
-                .setIgnoreFileSize(100)//忽略100KB以内的图片，默认值200，单位KB，
+                .setMaxFileSize(300)
+		
+		//忽略100KB以内的图片，默认值200，单位KB，
+                .setIgnoreFileSize(100)
+		
                 //单张图片压缩(String)       : CompressSingleListener
                 //多张图片压缩(List<String>) : CompressListener
                 //多个图片对象List<ThePhoto> : CompressObjListener
