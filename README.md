@@ -19,6 +19,7 @@ MyCompress.getBuilder(this)
                 .setPath(imagePath)//设置需要压缩的图片路径
                 //.setPathList(List<String>)   多张图片压缩
                 //.setPhotoList(List<ThePhoto>)多张图片压缩
+		
                 //设置图片压缩之后的目录,默认值getExternalCacheDir().getAbsolutePath()+"/compress";
                 .setCacheDir(compressDir)
 		
@@ -109,11 +110,6 @@ public abstract class CompressObjListener {
     public abstract void onError(List<ThePhoto> photoList,String errorPath,int errorCode);
 }
 
-/* ThePhoto 对象属性*/
-public class ThePhoto implements Serializable {
-    public String originalPath;//原始图片路径
-    public String compressPath;//压缩之后路径
-}
 ```
 
 
