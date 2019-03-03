@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.annotation.IntDef;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 
 import java.io.File;
@@ -46,6 +47,9 @@ public class CompressConfig {
 //    /**是否保留原始图片*/
 //    public boolean reserveRaw=true;
 
+    public CompressConfig(Fragment fragment) {
+        this(fragment.getActivity());
+    }
     public CompressConfig(Context context) {
         cacheDir=context.getExternalCacheDir().getAbsolutePath()+"/compress";
         makeDir(cacheDir);

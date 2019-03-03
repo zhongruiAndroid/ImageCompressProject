@@ -98,7 +98,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressBar.show();
 
         final String compressDir = Environment.getExternalStorageDirectory().getAbsoluteFile()+"/2019/";
-        MyCompress.getBuilder(this).setPath(imagePath).setCacheDir(compressDir)
+        MyCompress.getBuilder(this)
+                .setPath(imagePath)
+//                .setPathList()
+//                .setPhotoList()
+//                .setCacheDir(compressDir)
+//                .setEachCompressQuality(10)
+//                .setMaxWidthPixel(1080)
+//                .setMaxHeightPixel(1920)
+//                .setMaxFileSize(300)
+//                .setFormat(Bitmap.CompressFormat.JPEG)
+//                .setQuality(60)
+//                .setIgnoreFileSize(200)
                 .setCompressListener(new CompressSingleListener() {
                     @Override
                     public void onSuccess(String compressPath) {
@@ -282,9 +293,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /*ui线程压缩*/
         CompressConfig compressConfig=new CompressConfig(this);
         CompressManager manager=new CompressManager(compressConfig);
-//        String compressPath = manager.compressPixel("");//像素压缩
-//        String compressPath1 = manager.compressQuality("");//质量压缩
-//        String compressPath2 = manager.compressPixel("");//像素+质量压缩
+        String compressPath = manager.compressPX("");//像素压缩
+        String compressPath1 = manager.compressQ("");//质量压缩
+        String compressPath2 = manager.compressPXAndQ("");//像素+质量压缩
     }
 
     public void log(String string) {

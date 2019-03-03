@@ -476,7 +476,7 @@ public class CompressManager {
      * @param originalPath
      * @return
      */
-    public String compressPixel(String originalPath) {
+    private String compressPixel(String originalPath) {
         Bitmap bitmap = compressPixelToBitmap(originalPath);
         File saveFile = getSaveFile(originalPath);
         String savePath = saveFile.getAbsolutePath();
@@ -494,7 +494,7 @@ public class CompressManager {
      *
      * @param originalPath
      */
-    public String compressQuality(String originalPath) {
+    private String compressQuality(String originalPath) {
         Bitmap bitmap = CompressUtils.compressBitmapForScale(originalPath, 1);
         return compressQuality(bitmap, originalPath);
     }
@@ -504,7 +504,7 @@ public class CompressManager {
      * @param originalPath
      * @return
      */
-    public String compressPixelAndQuality(String originalPath){
+    private String compressPixelAndQuality(String originalPath){
         //先像素压缩
         Bitmap bitmap = compressPixelToBitmap(originalPath);
         //再质量压缩
@@ -519,6 +519,44 @@ public class CompressManager {
             savePath = CompressUtils.compressForQuality(saveFile, bitmap, config.getFormat(), config.getEachCompressQuality(), config.getMaxFileSize());
         } else {
             savePath = CompressUtils.compressForQuality(saveFile, bitmap, config.getFormat(), config.getQuality());
+        }
+        return savePath;
+    }
+
+
+    public String compressPX(String originalPath) {
+        if(pathIsEmpty(originalPath)){
+            return null;
+        }else if(pathNotExist(originalPath)){
+            return null;
+        }
+        String savePath = compressPixel(originalPath);
+        if(TextUtils.isEmpty(savePath)){
+            return null;
+        }
+        return savePath;
+    }
+    public String compressQ(String originalPath) {
+        if(pathIsEmpty(originalPath)){
+            return null;
+        }else if(pathNotExist(originalPath)){
+            return null;
+        }
+        String savePath = compressQuality(originalPath);
+        if(TextUtils.isEmpty(savePath)){
+            return null;
+        }
+        return savePath;
+    }
+    public String compressPXAndQ(String originalPath) {
+        if(pathIsEmpty(originalPath)){
+            return null;
+        }else if(pathNotExist(originalPath)){
+            return null;
+        }
+        String savePath = compressPixelAndQuality(originalPath);
+        if(TextUtils.isEmpty(savePath)){
+            return null;
         }
         return savePath;
     }

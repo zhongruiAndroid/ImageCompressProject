@@ -2,6 +2,7 @@ package com.github.ImageCompress;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.v4.app.Fragment;
 
 import java.util.List;
 
@@ -19,14 +20,23 @@ public class MyCompress {
         manager.startCompress();
     }
 
+    public static Builder getBuilder(Fragment fragment) {
+        return getBuilder(fragment.getActivity());
+    }
     public static Builder getBuilder(Context context) {
         return new Builder(context);
     }
 
+    public static BuilderPixel getBuilderPixel(Fragment fragment) {
+        return getBuilderPixel(fragment);
+    }
     public static BuilderPixel getBuilderPixel(Context context) {
         return new BuilderPixel(context);
     }
 
+    public static BuilderQuality getBuilderQuality(Fragment fragment) {
+        return getBuilderQuality(fragment);
+    }
     public static BuilderQuality getBuilderQuality(Context context) {
         return new BuilderQuality(context);
     }
