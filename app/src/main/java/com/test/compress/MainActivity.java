@@ -9,18 +9,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.github.ImageCompress.CompressListener;
+import com.github.ImageCompress.CompressObjListener;
 import com.github.ImageCompress.CompressSingleListener;
 import com.github.ImageCompress.MyCompress;
 import com.github.ImageCompress.MyMedia;
+import com.github.ImageCompress.ThePhoto;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btTakePhoto;
@@ -80,31 +83,108 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void imageCompress() {
-        if(TextUtils.isEmpty(imagePath)){
+       /* if(TextUtils.isEmpty(imagePath)){
             Toast.makeText(this,"请选择图片",Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
         if (progressBar == null) {
             progressBar = new ProgressDialog(this);
             progressBar.setTitle("压缩中");
         }
         progressBar.show();
-        MyCompress.get(this).setQuality(60).setMaxHeightPixel(1080).setPath(imagePath).setCompressListener(new CompressSingleListener() {
+        String absoluteFile = Environment.getExternalStorageDirectory().getAbsoluteFile()+"/190302/";
+
+        List<String> list=new ArrayList<>();
+        List<ThePhoto> photoList=new ArrayList<>();
+        ThePhoto thePhoto=new ThePhoto(absoluteFile+"1.jpg");
+        photoList.add(thePhoto);
+
+        thePhoto=new ThePhoto(absoluteFile+"2.jpg");
+        photoList.add(thePhoto);
+
+        thePhoto=new ThePhoto(absoluteFile+"5.jpg");
+        photoList.add(thePhoto);
+        thePhoto=new ThePhoto(absoluteFile+"3.jpg");
+        photoList.add(thePhoto);
+
+        thePhoto=new ThePhoto(absoluteFile+"4.jpg");
+        photoList.add(thePhoto);
+
+
+        list.add(absoluteFile+"1.jpg");
+        list.add(absoluteFile+"2.jpg");
+        list.add(absoluteFile+"3.jpg");
+        list.add("");
+        list.add(absoluteFile+"4.jpg");
+        CompressSingleListener compressSingleListener = new CompressSingleListener() {
             @Override
             public void onSuccess(String compressPath) {
-                log("onSuccess:"+compressPath);
+                log("onSuccess:" + compressPath);
                 if (progressBar != null) {
                     progressBar.dismiss();
                 }
             }
+
             @Override
             public void onError(String errorPath, int errorCode) {
-                log("errorPath:"+errorPath+"=="+errorCode);
+                log("errorPath:" + errorPath + "==" + errorCode);
                 if (progressBar != null) {
                     progressBar.dismiss();
                 }
             }
-        }).start();
+        };
+        CompressListener compressListener = new CompressListener() {
+            @Override
+            public void onNext(String compressPath, int position, int count) {
+                super.onNext(compressPath, position, count);
+                log(position + "===" + count + "onNext:" + compressPath);
+                progressBar.setTitle("压缩中" + position + "===" + count);
+            }
+
+            @Override
+            public void onSuccess(List<String> compressPathList) {
+                log("onSuccess:" + compressPathList.size());
+                if (progressBar != null) {
+                    progressBar.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(List<String> pathList, String errorPath, int errorCode) {
+                log("errorPath:" + errorPath + "==" + errorCode);
+                if (progressBar != null) {
+                    progressBar.dismiss();
+                }
+            }
+        };
+        CompressObjListener compressObjListener = new CompressObjListener() {
+            @Override
+            public void onNext(ThePhoto photo, int position, int count) {
+                super.onNext(photo, position, count);
+                log(position + "===" + count + "onNext:" + photo.compressPath);
+                progressBar.setTitle("压缩中" + position + "===" + count);
+            }
+
+            @Override
+            public void onSuccess(List<ThePhoto> photoCompressList) {
+                log("onSuccess:" + photoCompressList.size());
+                if (progressBar != null) {
+                    progressBar.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(List<ThePhoto> photoList, String errorPath, int errorCode) {
+                log("errorPath:" + errorPath + "==" + errorCode);
+                if (progressBar != null) {
+                    progressBar.dismiss();
+                }
+            }
+        };
+        //compressSingleListener
+        //compressListener
+        //compressObjListener
+        MyCompress.get(this).setQuality(60).setEachCompressQuality(5).setMaxWidthPixel(1080).setPhotoList(null).setCompressListener(compressObjListener).start();
     }
 
     private void selectImage() {

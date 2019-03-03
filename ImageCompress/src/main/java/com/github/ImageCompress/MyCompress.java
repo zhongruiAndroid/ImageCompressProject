@@ -35,7 +35,7 @@ public class MyCompress {
         private CompressConfig config;
         private CompressManager manager;
 
-        private Builder(Context context) {
+        public Builder(Context context) {
             config = new CompressConfig(context);
             config.setCompressType(CompressConfig.type_pixel_quality);
             manager = new CompressManager(config);

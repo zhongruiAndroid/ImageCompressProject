@@ -23,6 +23,8 @@ public class CompressManager {
     public final static int error_empty = 2;
     /*压缩失败*/
     public final static int error_compress_fail = 3;
+    /*没有设置数据源*/
+    public final static int error_path_null = 4;
 
     private static final int what_path = 1000;
     private static final int what_pathList = 1001;
@@ -39,7 +41,7 @@ public class CompressManager {
     /**
      * 单个原始文件路径
      */
-    private String imagePath;
+    private String imagePath="";
     /**
      * 原始文件路径list
      */
@@ -162,22 +164,27 @@ public class CompressManager {
     }
 
     public void startCompress() {
-        if (sourceType == sourceType_single && TextUtils.isEmpty(getImagePath()) == false) {
+        if (sourceType == sourceType_single) {
             compressForSingle(getImagePath());
-        } else if (sourceType == sourceType_list && getImagePathList() != null && getImagePathList().size() > 0) {
+        } else if (sourceType == sourceType_list) {
             compressForList();
-        } else if (sourceType == sourceType_photo && getPhotoList() != null && getPhotoList().size() > 0) {
+        } else if (sourceType == sourceType_photo ) {
             compressForPhoto();
         } else {
-            try {
+            sendErrorMessage("", error_path_null);
+            /*try {
                 throw new NoPathException("Need to compress images cannot be empty,please setPath(path)");
             } catch (NoPathException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
     private void compressForSingle(final String originalPath) {
+        if(TextUtils.isEmpty(originalPath)){
+            sendErrorMessage("", error_path_null);
+            return;
+        }
         thread = new Thread(new Runnable() {
             public void run() {
                 if (pathIsEmpty(originalPath)) {
@@ -203,6 +210,10 @@ public class CompressManager {
     }
 
     public void compressForList() {
+        if(getImagePathList() == null || getImagePathList().size() == 0){
+            sendErrorMessage("", error_path_null);
+            return;
+        }
         thread = new Thread(new Runnable() {
             boolean isSuccess = true;
 
@@ -242,6 +253,10 @@ public class CompressManager {
     }
 
     public void compressForPhoto() {
+        if(getPhotoList() == null || getPhotoList().size()==0){
+            sendErrorMessage("", error_path_null);
+            return;
+        }
         thread = new Thread(new Runnable() {
             boolean isSuccess = true;
 
