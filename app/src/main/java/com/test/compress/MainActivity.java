@@ -150,16 +150,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String name=System.currentTimeMillis()+".jpg";
         String absoluteFile = Environment.getExternalStorageDirectory().getAbsoluteFile()+"/190302/";
-        String filePath = getExternalFilesDir("a").getAbsoluteFile()+"/190302/";
-        String absolutePath = getFilesDir().getAbsolutePath()+"/190302aa/";
+//        String filePath = getExternalFilesDir("a").getAbsoluteFile()+"/190302/";
+//        String absolutePath = getFilesDir().getAbsolutePath()+"/190302aa/";
         log("name"+name);
         log("absoluteFile==:"+absoluteFile);
-        log("absolutePath==:"+absolutePath);
+//        log("absolutePath==:"+absolutePath);
 
         photoUri = MyMedia.fileToUriForExternal(this, absoluteFile, name);
-
-        cameraDefaultFile = MyMedia.getCameraDefaultFile();
-        photoUri = MyMedia.fileToUri(this, cameraDefaultFile);
+//        cameraDefaultFile = MyMedia.getCameraDefaultFile();
+        cameraDefaultFile=new File(absoluteFile,name);
+//        photoUri = MyMedia.fileToUri(this, cameraDefaultFile);
         Intent takePhotoIntent = MyMedia.getTakePhotoIntent(photoUri);
         startActivityForResult(takePhotoIntent, 100);
     }
